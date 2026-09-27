@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Future Girlfriend Application 💌</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--ink:#1d1330;--pink:#ff4f9a;--lav:#a98bff;--mint:#5fd9b5;--yel:#ffd23f;--sky:#6cc4ff;--bg:#fff3f8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,sans-serif;color:var(--ink);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(#ffc2dc 1.4px,transparent 1.6px);background-size:22px 22px;opacity:.55;z-index:-1}
+.floaty{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.floaty span{position:absolute;bottom:-40px;font-size:22px;animation:up linear infinite;opacity:.55}
+@keyframes up{to{transform:translateY(-115vh) rotate(25deg)}}
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:22px 14px 120px}
+.hero{background:#fff;border:3px solid var(--ink);border-radius:26px;box-shadow:7px 7px 0 var(--ink);padding:26px 24px 22px;text-align:center;position:relative}
+.hero .emb{display:inline-block;animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(-6deg) scale(1.05)}}
+.hero h1{font:900 clamp(26px,6vw,46px)/1 "Arial Black",Arial,sans-serif;margin:6px 0 0;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--pink);display:inline-block;transform:rotate(-3deg)}
+.hero p{margin:12px auto 0;max-width:520px;font-size:15.5px;line-height:1.5;color:#4a3d5c}
+.sticker{position:absolute;background:var(--yel);border:2.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-weight:800;font-size:13px;transform:rotate(8deg);top:-14px;right:18px;box-shadow:3px 3px 0 var(--ink)}
+.prog{position:sticky;top:0;z-index:4;margin:18px 0 0;background:rgba(255,243,248,.92);backdrop-filter:blur(6px);padding:10px 2px}
+.pbar{height:16px;border:2.5px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--pink) 0 12px,#ff74b0 12px 24px);transition:width .4s cubic-bezier(.3,1.6,.5,1)}
+.pmsg{font-size:13px;font-weight:800;margin-top:6px;display:flex;justify-content:space-between}
+.card{background:#fff;border:3px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);padding:30px 24px 24px;margin-top:34px;position:relative}
+.card.priv{background:#1d1330;color:#fff;box-shadow:6px 6px 0 var(--pink)}
+.card.priv input[type=text],.card.priv textarea{color:#fff;border-color:#fff;background:transparent}
+.card.priv .chip span{background:#2c2045;color:#fff;border-color:#fff}
+.card.priv .chip input:checked+span{background:var(--pink)}
+.card.priv .tag{color:#cbb8e6}
+.privtog{display:flex;gap:10px;align-items:center;background:#2c2045;border:2px dashed #cbb8e6;border-radius:12px;padding:10px 12px;margin-bottom:18px;font-size:14px;font-weight:700;cursor:pointer}
+.privtog input{width:20px;height:20px;accent-color:var(--pink)}
+.card h2{position:absolute;top:-20px;left:20px;margin:0;font:900 17px/1 "Arial Black",Arial,sans-serif;background:var(--c);color:var(--ink);border:3px solid var(--ink);border-radius:14px;padding:9px 14px;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--ink)}
+.card .tag{font-size:13px;color:#7a6c8c;margin:4px 0 16px;font-weight:600}
+.photo-row{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.photo{width:250px;max-width:100%;aspect-ratio:4/5;border:3px dashed var(--ink);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;background:#fff0f6 center/cover no-repeat;flex-shrink:0;transition:transform .2s;font-weight:800;font-size:14px;text-align:center}
+.photo:hover{transform:rotate(-2deg) scale(1.02)}
+.photo b{font-size:42px}
+.photo.has{border-style:solid}
+.photo.has *{display:none}
+.photo input{display:none}
+.photo-note{flex:1;min-width:200px;line-height:1.55;font-size:15px}
+.photo-note small{display:block;color:#8a7a9a;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px}
+.fld.w{grid-column:1/-1}
+.q{display:block;font-size:15px;font-weight:800;margin-bottom:8px}
+input[type=text],input[type=date]{width:100%;border:none;border-bottom:2.5px solid var(--ink);padding:7px 2px;font:inherit;font-size:15.5px;background:transparent;outline:none;border-radius:0;transition:border-color .2s}
+input[type=text]:focus,input[type=date]:focus,textarea:focus{border-color:var(--pink)!important}
+textarea{width:100%;resize:none;overflow:hidden;border:2.5px solid var(--ink);border-radius:14px;padding:10px 12px;font:inherit;font-size:15.5px;outline:none;min-height:66px;background:#fffafc}
+.cnt{font-size:11.5px;color:#9a8aa8;text-align:right;margin-top:4px;font-weight:700}
+.cnt.hi{color:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{position:relative;cursor:pointer;user-select:none}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-block;border:2.5px solid var(--ink);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700;background:#fff;transition:transform .15s,background .15s}
+.chip:hover span{transform:translateY(-2px);box-shadow:0 3px 0 var(--ink)}
+.chip input:checked+span{background:var(--pink);color:#fff;animation:pop .3s}
+.chip input:focus-visible+span{outline:3px solid var(--lav);outline-offset:2px}
+@keyframes pop{40%{transform:scale(1.14) rotate(-3deg)}}
+.other{max-width:180px}
+.range{display:flex;align-items:center;gap:14px}
+.range input{flex:1;accent-color:var(--pink);height:28px}
+.range output{font-weight:900;font-size:20px;min-width:110px;text-align:right}
+.cert label.chk{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;cursor:pointer;font-weight:700}
+.cert input[type=checkbox]{width:20px;height:20px;accent-color:var(--pink);flex-shrink:0;margin-top:1px}
+.cert .grid{margin-top:16px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-top:3px solid var(--ink);padding:12px 14px;display:flex;justify-content:center;gap:10px}
+.btn{border:3px solid var(--ink);background:#fff;color:var(--ink);font:900 15px system-ui,sans-serif;padding:11px 20px;border-radius:999px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.pri{background:var(--pink);color:#fff}
+.btn:disabled{opacity:.6;cursor:wait}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:14px;font-size:14px;font-weight:700;opacity:0;transition:.25s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(29,19,48,.75);display:none;z-index:20;overflow:auto;padding:24px 14px}
+.modal.on{display:block}
+.mbox{max-width:780px;margin:0 auto;background:#fff;border:3px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--pink);padding:24px}
+.mbox h3{margin:0 0 4px;font:900 24px "Arial Black",Arial,sans-serif}
+.mbox p{margin:0 0 14px;color:#5b4d6d;font-size:14.5px}
+.warn{background:#fff6d6;border:2.5px solid var(--ink);padding:10px 12px;border-radius:12px;font-size:13.5px;font-weight:700;margin-bottom:14px}
+.imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.imgs figure{margin:0;text-align:center}
+.imgs img{width:100%;border:3px solid var(--ink);border-radius:12px;display:block}
+.imgs figcaption{margin-top:10px}
+.imgs .btn{padding:7px 14px;font-size:13px}
+.macts{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;justify-content:flex-end}
+#stage{position:fixed;top:0;left:-20000px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.photo{width:100%;aspect-ratio:4/3}.card{padding:30px 16px 20px}}
+
+/* ---------- export page (1080x1350) ---------- */
+.pg{width:1080px;height:1350px;background:#fff3f8;color:#1d1330;font-family:Arial,Helvetica,sans-serif;padding:34px;--k:1}
+.pin{height:100%;background:#fff;border:5px solid #1d1330;border-radius:40px;padding:34px 48px 26px;display:flex;flex-direction:column;position:relative}
+.ph{display:flex;align-items:center;justify-content:center;gap:18px;padding-bottom:16px;border-bottom:4px dashed #ffb3d4;flex-shrink:0}
+.ph h1{font:900 42px/1 "Arial Black",Arial,sans-serif;margin:0}
+.ph h1 span{color:#ff4f9a}
+.pb{flex:1;overflow:hidden;padding-top:calc(var(--k)*6px)}
+.hw{text-align:center;margin:calc(var(--k)*26px) 0 calc(var(--k)*16px)}
+.pb h3{display:inline-block;margin:0;font:900 calc(var(--k)*25px)/1 "Arial Black",Arial,sans-serif;padding:calc(var(--k)*10px) 20px;border:4px solid #1d1330;border-radius:16px;transform:rotate(-1.5deg)}
+.eg{display:grid;grid-template-columns:1fr 1fr;column-gap:38px;row-gap:calc(var(--k)*12px)}
+.ei{font-size:calc(var(--k)*22px);line-height:1.32;border-bottom:2.5px dashed #ffc2dc;padding-bottom:calc(var(--k)*6px);overflow-wrap:anywhere}
+.ei.w{grid-column:1/-1}
+.ei b{color:#4a3d5c}
+.ea{font-family:"Segoe Print","Bradley Hand","Comic Sans MS","Chalkboard SE",cursive;color:#e0267a}
+.ea.long{display:block;margin-top:calc(var(--k)*4px);white-space:pre-wrap}
+.pp{display:flex;gap:38px;align-items:center;margin-top:26px}
+.pic{width:360px;height:420px;border:5px solid #1d1330;border-radius:26px;background:#ffe3ef center/cover no-repeat;flex-shrink:0;transform:rotate(-2.5deg);box-shadow:10px 10px 0 #ff4f9a}
+.pp .lbl{display:inline-block;background:#ffd23f;border:3px solid #1d1330;border-radius:999px;padding:6px 16px;font:900 18px Arial;letter-spacing:1px}
+.pp .nm{font-size:58px;line-height:1.08;margin:14px 0 12px;overflow-wrap:anywhere}
+.pp .meta{font-size:25px;color:#4a3d5c;font-weight:bold}
+.pp .emo{font-size:48px;margin-top:12px}
+.pc{border:4px solid #1d1330;border-radius:18px;background:#fff3f8;padding:calc(var(--k)*14px) 20px;margin-top:calc(var(--k)*24px);font-size:calc(var(--k)*19px);line-height:1.4}
+.stamp{position:absolute;right:40px;bottom:70px;width:190px;height:190px;border:6px solid #ff4f9a;border-radius:50%;color:#ff4f9a;display:flex;align-items:center;justify-content:center;text-align:center;font:900 24px/1.1 "Arial Black",Arial;transform:rotate(-14deg);opacity:.85;background:rgba(255,255,255,.7)}
+.pf{display:flex;justify-content:space-between;font-size:17px;font-weight:bold;color:#9a8aa8;padding-top:12px;margin-top:12px;border-top:4px dashed #ffb3d4;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="floaty" id="floaty"></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="sticker">now hiring 💘</div>
+    <div class="emb" id="emb1"></div>
+    <h1>FUTURE <em>GIRLFRIEND</em><br>APPLICATION</h1>
+    <p>Congrats, you've been shortlisted for the most exclusive position in town. Answer honestly (or at least entertainingly), then turn it into images to share. ✨</p>
+  </div>
+
+  <div class="prog"><div class="pbar"><i id="pfill"></i></div><div class="pmsg"><span id="pmsg">Let's gooo 🚀</span><span id="ppct">0%</span></div></div>
+
+  <div class="card" style="--c:var(--yel)">
+    <h2>📸 Headshot Required</h2>
+    <p class="tag">&nbsp;</p>
+    <div class="photo-row">
+      <label class="photo" id="photoBox"><b>🤳</b><span>Tap to add your<br>best selfie</span><input type="file" id="photo" accept="image/*"></label>
+      <div class="photo-note">Applications without a photo will be considered… but judged a little. The photo must be recent (taken in the last 6 months). Filters allowed. Dog filter strongly encouraged.
+        <small>Big photos are shrunk automatically.</small></div>
+    </div>
+  </div>
+
+  <div id="form"></div>
+
+  <div class="card cert" style="--c:var(--mint)">
+    <h2>✍️ Pinky Promise</h2>
+    <p class="tag">&nbsp;</p>
+    <label class="chk"><input type="checkbox" id="cert"> I certify that everything above is true, honest and not written by my best friend.</label>
+    <div class="grid">
+      <div class="fld"><label class="q" for="sig">Signature</label><input type="text" id="sig" maxlength="30" placeholder="Your name, fancy style"></div>
+      <div class="fld"><label class="q" for="date">Date</label><input type="date" id="date"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bar">
+  <button class="btn" id="reset">Start over</button>
+  <button class="btn pri" id="gen">Submit & make images 💌</button>
+</div>
+
+<div class="modal" id="modal"><div class="mbox">
+  <h3>Application submitted! 🎉</h3>
+  <p>Save each page, or share them all at once. On a phone you can also long-press an image to save it.</p>
+  <div class="warn" id="warn" hidden></div>
+  <div class="imgs" id="imgs"></div>
+  <div class="macts">
+    <button class="btn" id="close">Edit answers</button>
+    <button class="btn" id="dlAll">Download all</button>
+    <button class="btn pri" id="share">Share 💌</button>
+  </div>
+</div></div>
+
+<div id="stage"></div>
+<canvas id="confetti"></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+const Q=[
+{t:'🪪 The Basics',c:'#ffd23f',tag:'The boring-but-necessary part. Speed round!',pg:1,f:[
+ {id:'fn',l:'First name',k:'s',m:25,hide:1},
+ {id:'ln',l:'Last name',k:'s',m:25,hide:1},
+ {id:'age',l:'Age',k:'s',m:3,hide:1},
+ {id:'city',l:'City you live in',k:'s',m:30,hide:1},
+ {id:'ig',l:'Instagram / Snap',e:'Socials',k:'s',m:30},
+ {id:'sign',l:'Zodiac sign',e:'Zodiac',k:'s',m:15},
+ {id:'ht',l:'Height (no rounding up)',e:'Height',k:'s',m:10},
+ {id:'emo',l:'Describe yourself in 3 emojis',k:'s',m:16,hide:1},
+ {id:'live',l:'Living situation',e:'Lives',k:'r',o:['With parents 🏠','With roomies','Solo queen 👑','Own place']}]},
+{t:'🎓 Brains & Hustle',c:'#6cc4ff',tag:'Tell us about the grind.',pg:1,f:[
+ {id:'study',l:'What did you / do you study?',e:'Studied',k:'s',m:40},
+ {id:'where',l:'Where?',e:'At',k:'s',m:40},
+ {id:'job',l:'What do you do these days?',e:'Currently',k:'s',m:40},
+ {id:'dream',l:"Dream job if money didn't exist",e:'Dream job',k:'s',m:40},
+ {id:'talent',l:'Most useless talent',e:'Useless talent',k:'s',m:45}]},
+{t:'✨ Vibe Check',c:'#a98bff',tag:'This is where it gets serious. Kind of.',pg:2,f:[
+ {id:'bev',l:'Your fuel?',e:'Fuel',k:'r',o:['Chai ☕','Coffee','Energy drinks 😵‍💫',"Just water, I'm healthy"]},
+ {id:'owl',l:'Morning person or night owl?',e:'Body clock',k:'r',o:['Early bird 🐦','Night owl 🦉','Nap enthusiast']},
+ {id:'fries',l:'Can I steal fries from your plate?',e:'Fry stealing',k:'r',o:['Of course 🥰','Absolutely not','Only if you ask nicely','Order your own']},
+ {id:'eat',l:'When I ask "where do you want to eat?"',e:'"Where to eat?"',k:'r',o:["I'll pick 😎","Anything's fine","I'll veto until you guess right"]},
+ {id:'ready',l:'Time to get ready',e:'Getting ready',k:'r',o:['10 min flat','30 min','An hour+','"5 more minutes" 🙃']},
+ {id:'pine',l:'Pineapple on pizza?',e:'Pineapple pizza',k:'r',o:['Yes 🍍','Crime','Never tried','Only on Tuesdays']},
+ {id:'red',l:'Your red flag (be honest) 🚩',e:'Red flag',k:'s',m:50},
+ {id:'green',l:'Your green flag 💚',e:'Green flag',k:'s',m:50},
+ {id:'rewatch',l:"Show you've rewatched way too many times",e:'Comfort show',k:'s',m:40},
+ {id:'song',l:'Song on repeat right now',e:'On repeat',k:'s',m:40},
+ {id:'emoji',l:'Most-used emoji',e:'Top emoji',k:'s',m:6}]},
+{t:'🌙 Lifestyle',c:'#5fd9b5',tag:'A day in your life, but make it spicy.',pg:2,f:[
+ {id:'sun',l:'Perfect Sunday looks like',e:'Perfect Sunday',k:'r',o:['Bed rotting 🛌','Brunch & shopping','Road trip','Gym, then glow up']},
+ {id:'trip',l:'Dream getaway',e:'Getaway',k:'r',o:['Beach 🏖️','Mountains 🏔️','City lights 🌃','Wherever you are 😏']},
+ {id:'screen',l:'Daily screen time (be honest)',e:'Screen time',k:'r',o:['Under 3 hrs','3–6 hrs','6+ hrs',"Please don't ask"]},
+ {id:'pet',l:'Pet team',e:'Pet team',k:'r',o:['Dogs 🐶','Cats 🐱','Both','Plants only 🪴']},
+ {id:'zomb',l:"In a zombie apocalypse you'd be:",e:'Zombie role',k:'r',o:['The leader','The medic','First to go 💀','Joining the zombies']},
+ {id:'snack',l:'3 AM snack of choice',e:'3 AM snack',k:'s',m:40}]},
+{t:'💘 Love Lab',c:'#ff8fc0',tag:'The part everyone skips to.',pg:3,f:[
+ {id:'love',l:'Your love language(s)',e:'Love language',k:'m',o:['Words 💬','Quality time ⏳','Gifts 🎁','Acts of service','Physical touch 🤗']},
+ {id:'text',l:'Texting style',k:'r',o:['Instant replies ⚡','Reply in 3–5 business days','Voice notes only 🎙️','Memes as communication']},
+ {id:'gm',l:'Good morning texts are…',e:'GM texts',k:'r',o:['Mandatory ☀️','Cute but optional','I wake up at noon']},
+ {id:'call',l:'Late-night calls?',e:'Late-night calls',k:'r',o:['Till 3 AM 📞','A quick goodnight','I fall asleep mid-call']},
+ {id:'hoodie',l:'If I lend you my hoodie, will you return it?',e:'Hoodie policy',k:'r',o:['Obviously','Define "return"',"It's mine now 😌"]},
+ {id:'pda',l:'Public display of affection?',e:'Public display of affection',k:'r',o:['Love it 💋','Hand-holding max','Keep it private 🤫']},
+ {id:'jeal',l:'How jealous are you?',e:'Jealousy level',k:'r',o:['Not at all','A little, it\'s cute','Don\'t test me 😤']},
+ {id:'loc',l:'Sharing live location?',e:'Live location',k:'r',o:['Always 📍','Only when travelling','Absolutely not']},
+ {id:'sorry',l:'After a fight, who says sorry first?',e:'Says sorry first',k:'r',o:['Me','You, obviously 😌','Whoever was wrong','Whoever caves first']},
+ {id:'upset',l:"When you're upset you:",e:'When upset',k:'r',o:['Tell you directly','Say "I\'m fine" 🙂','Need snacks first','Need space']},
+ {id:'dates',l:'Date planning',e:'Dates',k:'r',o:['I plan','You plan','Surprise me 🎀','Take turns']},
+ {id:'anniv',l:'Remembering special dates',e:'Special dates',k:'r',o:['I remember everything 📅','Phone reminders','Monthiversaries count?']},
+ {id:'first',l:'Ideal first date',e:'Ideal first date',k:'s',m:60},
+ {id:'gift',l:'Best gift someone could give you',e:'Best gift',k:'s',m:50},
+ {id:'deal',l:'Instant deal-breaker',e:'Deal-breaker',k:'s',m:50},
+ {id:'marry',l:'Do you believe in marriage?',e:'Marriage',k:'r',o:['Yes','No','Maybe']},
+ {id:'kids',l:'Do you want kids?',e:'Kids',k:'r',o:['Yes','No','Maybe']},
+ {id:'val',l:'What do you value most in a partner?',e:'I value',k:'m',o:['Loyalty','Communication','Humor','Ambition','Kindness','Good hugs'],other:1},
+ {id:'look',l:'What are you looking for in a relationship?',e:'Looking for',k:'l',m:200}]},
+{t:'🔒 Just Between Us',c:'#ff4f9a',tag:'',pg:4,dark:1,f:[
+ {id:'notice',l:'When did you first notice me? 👀',e:'First noticed me',k:'s',m:60},
+ {id:'imp',l:'Your honest first impression of me',e:'First impression',k:'l',m:160},
+ {id:'fav',l:'Favorite thing about me so far',e:'Fave thing about me',k:'l',m:160},
+ {id:'crush',l:'How much do you like me right now? (1–10)',e:'Crush meter',k:'g'},
+ {id:'kiss',l:'Where should our first kiss happen? 💋',e:'First kiss spot',k:'s',m:50},
+ {id:'cry',l:'Last time you cried, and why?',e:'Last cried',k:'s',m:60},
+ {id:'secret',l:'A small secret nobody knows 🤫',e:'Secret',k:'l',m:150},
+ {id:'insec',l:"Something you're insecure about",e:'Insecure about',k:'l',m:150},
+ {id:'fear',l:'Biggest fear in a relationship',e:'Biggest fear',k:'l',m:150},
+ {id:'conf',l:'How do you want me to handle it when you\'re upset?',e:'When I\'m upset, you should',k:'l',m:150}]},
+{t:'🏁 Final Round',c:'#ffd23f',tag:'Make it count. The committee is watching. 👀',pg:4,f:[
+ {id:'pitch',l:'Pitch yourself in one sentence',e:'My pitch',k:'l',m:120},
+ {id:'why',l:"Why would you be an amazing girlfriend?",e:"Why I'd be amazing",k:'l',m:220},
+ {id:'luck',l:'How lucky would I be to date you? (1–10)',e:"How lucky you'd be",k:'g'},
+ {id:'else',l:'Anything else the committee should know?',e:'Also…',k:'l',m:180}]}
+];
+
+const $=id=>document.getElementById(id);
+const h=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const emblem=s=>`<svg width="${s}" height="${s}" viewBox="0 0 100 100"><circle cx="50" cy="46" r="40" fill="#ffd23f" stroke="#1d1330" stroke-width="4"/><g fill="none" stroke="#1d1330" stroke-width="2.5" stroke-linecap="round"><path d="M30 72Q16 54 27 28"/><path d="M70 72Q84 54 73 28"/></g><path d="M50 66C28 52 30 30 42 31c4 .4 7 3.6 8 7 1-3.4 4-6.6 8-7 12-1 14 21-8 35z" fill="#ff4f9a" stroke="#1d1330" stroke-width="3"/><rect x="18" y="84" width="64" height="14" rx="7" fill="#1d1330"/><text x="50" y="94" text-anchor="middle" font-family="Arial Black,Arial" font-weight="900" font-size="7.5" fill="#fff">HEART ACADEMY</text></svg>`;
+$('emb1').innerHTML=emblem(92);
+
+/* floating hearts */
+const F=['💖','💌','✨','🌸','💘','🍓','⭐'];
+for(let i=0;i<14;i++){const s=h('span',null,F[i%F.length]);s.style.left=Math.random()*100+'%';s.style.animationDuration=12+Math.random()*14+'s';s.style.animationDelay=-Math.random()*20+'s';s.style.fontSize=16+Math.random()*16+'px';$('floaty').append(s)}
+
+/* ---------- build form ---------- */
+const scale=v=>v<=3?'😐':v<=5?'🙂':v<=7?'😊':v<=9?'🥰':'🍀 JACKPOT';
+const grow=t=>{t.style.height='auto';t.style.height=t.scrollHeight+3+'px'};
+Q.forEach(sec=>{
+  const s=h('div','card'+(sec.dark?' priv':''));s.style.setProperty('--c',sec.c);s.append(h('h2',null,sec.t),h('p','tag',sec.tag));
+  const g=h('div','grid');
+  sec.f.forEach(f=>{
+    const wide=f.k==='l'||f.k==='m'||f.k==='g'||(f.k==='r'&&(f.o.length>3||f.o.join('').length>30));
+    const d=h('div','fld'+(wide?' w':''));const q=h('label','q',f.l);d.append(q);
+    if(f.k==='s'){const i=h('input');i.type='text';i.id=f.id;i.maxLength=f.m;q.htmlFor=f.id;d.append(i)}
+    else if(f.k==='l'){const t=h('textarea');t.id=f.id;t.maxLength=f.m;t.rows=2;q.htmlFor=f.id;const c=h('div','cnt',`0 / ${f.m}`);
+      t.addEventListener('input',()=>{grow(t);c.textContent=`${t.value.length} / ${f.m}`;c.classList.toggle('hi',t.value.length>f.m*.9)});d.append(t,c)}
+    else if(f.k==='g'){const w=h('div','range');const i=h('input');i.type='range';i.min=1;i.max=10;i.value=5;i.id=f.id;const o=h('output',null,'drag me 👉');
+      i.addEventListener('input',()=>{i.dataset.t='1';o.textContent=`${i.value}/10 ${scale(+i.value)}`;upd()});w.append(i,o);d.append(w)}
+    else{const c=h('div','chips');f.o.forEach(o=>{const lb=h('label','chip');const i=h('input');i.type=f.k==='r'?'radio':'checkbox';i.name=f.id;i.value=o;lb.append(i,h('span',null,o));c.append(lb)});
+      if(f.other){const i=h('input','other');i.type='text';i.id=f.id+'_o';i.placeholder='Other…';i.maxLength=30;c.append(i)}d.append(c)}
+    g.append(d)});
+  s.append(g);$('form').append(s)});
+
+/* click a selected radio again to clear it */
+document.addEventListener('click',e=>{const i=e.target;if(i.type!=='radio')return;if(i.dataset.was==='1')i.checked=false;document.querySelectorAll(`input[name="${i.name}"]`).forEach(x=>x.dataset.was=x.checked?'1':'0');upd()});
+
+const today=()=>new Date().toISOString().slice(0,10);
+$('date').value=today();
+
+/* ---------- photo (compressed) ---------- */
+let photo='';
+$('photo').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const M=1000,sc=Math.min(1,M/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*sc;c.height=im.height*sc;c.getContext('2d').drawImage(im,0,0,c.width,c.height);photo=c.toDataURL('image/jpeg',.86);const b=$('photoBox');b.style.backgroundImage=`url(${photo})`;b.classList.add('has');toast('Looking good 😍');upd()};im.src=r.result};r.readAsDataURL(file)});
+
+/* ---------- read + clean answers ---------- */
+const all=Q.flatMap(s=>s.f);const byId=id=>all.find(f=>f.id===id);
+function val(f){
+  if(typeof f==='string')f=byId(f);
+  if(f.k==='s')return $(f.id).value.trim().replace(/\s+/g,' ');
+  if(f.k==='l')return $(f.id).value.trim().replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n');
+  if(f.k==='g'){const i=$(f.id);return i.dataset.t?`${i.value}/10 ${scale(+i.value)}`:''}
+  if(f.k==='r')return(document.querySelector(`input[name="${f.id}"]:checked`)||{}).value||'';
+  const a=[...document.querySelectorAll(`input[name="${f.id}"]:checked`)].map(x=>x.value);
+  if(f.other){const o=$(f.id+'_o').value.trim();if(o)a.push(o)}return a.join(' · ');
+}
+
+/* ---------- progress ---------- */
+const msgs=[[0,"Let's gooo 🚀"],[15,'Warming up 🔥'],[35,'Ooh, interesting… 👀'],[60,'The committee is impressed 💅'],[85,'Almost there!! 🏃‍♀️'],[100,'Perfect application 💯']];
+function upd(){const n=all.filter(f=>val(f)).length+(photo?1:0);const p=Math.round(n/(all.length+1)*100);$('pfill').style.width=p+'%';$('ppct').textContent=p+'%';$('pmsg').textContent=msgs.filter(m=>p>=m[0]).pop()[1]}
+document.addEventListener('input',upd);document.addEventListener('change',upd);
+
+/* ---------- build export pages ---------- */
+const PAGES=[...new Set(Q.map(s=>s.pg))];
+function header(){const d=h('div','ph');const s=h('span');s.innerHTML=emblem(92);const t=h('h1');t.innerHTML='FUTURE <span>GIRLFRIEND</span><br>APPLICATION';d.append(s,t);return d}
+function buildPages(){
+  const name=[val('fn'),val('ln')].filter(Boolean).join(' ');const pages=[];const last=PAGES[PAGES.length-1];
+  PAGES.forEach(p=>{
+    const body=h('div','pb');let has=false;
+    if(p===1){const pp=h('div','pp');if(photo){const pic=h('div','pic');pic.style.backgroundImage=`url(${photo})`;pp.append(pic)}
+      const t=h('div');t.append(h('div','lbl','APPLICANT #'+(1000+Math.floor(Math.random()*9000))),h('div','nm ea',name));
+      const meta=[val('age')&&val('age')+' yrs',val('city')&&'📍 '+val('city')].filter(Boolean).join('  ·  ');if(meta)t.append(h('div','meta',meta));
+      if(val('emo'))t.append(h('div','emo',val('emo')));pp.append(t);body.append(pp);has=true}
+    Q.filter(s=>s.pg===p&&!(s.priv&&!$('privInc').checked)).forEach(sec=>{
+      const items=sec.f.filter(f=>!f.hide&&val(f));if(!items.length)return;has=true;
+      const hw=h('div','hw');const h3=h('h3',null,sec.t);h3.style.background=sec.c;hw.append(h3);body.append(hw);const g=h('div','eg');
+      items.forEach(f=>{const v=val(f);const long=f.k==='l'||v.length>30;const it=h('div','ei'+(long||f.k==='m'?' w':''));
+        it.append(h('b',null,(f.e||f.l)+': '),h('span','ea'+(f.k==='l'?' long':''),v));g.append(it)});
+      body.append(g)});
+    if(p===last&&($('cert').checked||$('sig').value.trim())){has=true;const c=h('div','pc');
+      c.append(document.createTextNode(($('cert').checked?'✅ ':'')+'I certify that everything above is true, honest and not written by my best friend.'));
+      const l=h('div');l.style.marginTop='8px';const d=$('date').value?new Date($('date').value+'T00:00').toLocaleDateString(undefined,{day:'numeric',month:'long',year:'numeric'}):'';
+      l.append(h('b',null,'Signed: '),h('span','ea',$('sig').value.trim()||'—'),h('b',null,'    Date: '),h('span','ea',d));c.append(l);body.append(c)}
+    if(has)pages.push(body)});
+  return pages.map((body,i)=>{const pg=h('div','pg');const inn=h('div','pin');const ft=h('div','pf');
+    ft.append(h('span',null,'💌 Future Girlfriend Application'+(name?' · '+name:'')),h('span',null,`${i+1} / ${pages.length}`));
+    inn.append(header(),body,ft);
+    if(i===pages.length-1){const st=h('div','stamp');st.innerHTML='APPLICATION<br>RECEIVED<br>💌';inn.append(st)}
+    pg.append(inn);return pg});
+}
+
+/* shrink text first, then trim the longest answers only if still needed */
+function fit(pg){
+  const b=pg.querySelector('.pb');const over=()=>b.scrollHeight>b.clientHeight+1;let k=1,trim=false;
+  while(over()&&k>0.66){k-=0.03;pg.style.setProperty('--k',k.toFixed(2))}
+  for(let n=0;over()&&n<120;n++){
+    const L=[...pg.querySelectorAll('.ea.long')].filter(e=>e.textContent.length>40).sort((a,c)=>c.textContent.length-a.textContent.length);
+    if(!L.length)break;const e=L[0];let t=e.textContent.replace(/…$/,'');t=t.slice(0,Math.floor(t.length*.9)).replace(/\s+\S*$/,'');e.textContent=t+'…';trim=true}
+  return trim;
+}
+
+/* ---------- confetti ---------- */
+function confetti(){const c=$('confetti'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+  const cols=['#ff4f9a','#ffd23f','#a98bff','#5fd9b5','#6cc4ff'];
+  const P=Array.from({length:150},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*16-6,r:Math.random()*6+4,c:cols[Math.random()*5|0],a:Math.random()*6,s:Math.random()*.3-.15}));
+  let t=0;(function f(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.a+=p.s;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);x.restore()});if(++t<150)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
+
+/* ---------- generate ---------- */
+let blobs=[],urls=[];
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2800)};
+$('gen').onclick=async()=>{
+  if(!val('fn')){toast('The committee needs at least your first name 😅');$('fn').scrollIntoView({behavior:'smooth',block:'center'});$('fn').focus();return}
+  if(typeof html2canvas==='undefined'){toast('Image tool failed to load. Check your connection and retry.');return}
+  const btn=$('gen');btn.disabled=true;btn.textContent='Reviewing… 🧐';
+  try{
+    urls.forEach(u=>URL.revokeObjectURL(u));blobs=[];urls=[];
+    const st=$('stage');st.innerHTML='';const pages=buildPages();let trimmed=false;
+    for(const pg of pages){st.append(pg);if(fit(pg))trimmed=true;
+      const c=await html2canvas(pg,{scale:1,backgroundColor:'#fff3f8',logging:false,width:1080,height:1350});
+      const b=await new Promise(r=>c.toBlob(r,'image/png'));blobs.push(b);urls.push(URL.createObjectURL(b))}
+    st.innerHTML='';
+    const w=$('warn');w.hidden=!trimmed;w.textContent='✂️ Some long answers were cut short (…) to fit the page. Shorten them a bit if you want them in full.';
+    const g=$('imgs');g.innerHTML='';
+    urls.forEach((u,i)=>{const f=h('figure');const im=h('img');im.src=u;im.alt=`Page ${i+1}`;const d=h('button','btn',`Save page ${i+1}`);d.onclick=()=>dl(i);const fc=h('figcaption');fc.append(d);f.append(im,fc);g.append(f)});
+    $('modal').classList.add('on');confetti();
+  }catch(err){console.error(err);toast('Something went wrong creating the images. Try again.')}
+  btn.disabled=false;btn.textContent='Submit & make images 💌';
+};
+const fname=i=>`girlfriend-application-${i+1}.png`;
+function dl(i){const a=document.createElement('a');a.href=urls[i];a.download=fname(i);document.body.append(a);a.click();a.remove()}
+$('dlAll').onclick=()=>urls.forEach((_,i)=>setTimeout(()=>dl(i),i*350));
+$('share').onclick=async()=>{
+  const files=blobs.map((b,i)=>new File([b],fname(i),{type:'image/png'}));
+  if(navigator.canShare&&navigator.canShare({files})){try{await navigator.share({files,title:'My girlfriend application 💌'})}catch(e){if(e.name!=='AbortError')toast('Sharing was blocked here. Use Download instead.')}}
+  else toast("Sharing isn't supported in this browser. Download and share from your gallery 📲");
+};
+$('close').onclick=()=>$('modal').classList.remove('on');
+$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on')};
+$('reset').onclick=()=>{if(!confirm('Clear all answers and start over?'))return;
+  document.querySelectorAll('.wrap input[type=text],.wrap textarea').forEach(i=>{i.value='';i.dispatchEvent(new Event('input'))});
+  document.querySelectorAll('.wrap input[type=radio],.wrap input[type=checkbox]').forEach(i=>{i.checked=false;i.dataset.was='0'});
+  document.querySelectorAll('.range input').forEach(r=>{r.value=5;delete r.dataset.t;r.nextSibling.textContent='drag me 👉'});
+  $('date').value=today();photo='';const b=$('photoBox');b.style.backgroundImage='';b.classList.remove('has');$('photo').value='';upd();window.scrollTo({top:0,behavior:'smooth'})};
+
+upd();
+</script>
+</body>
+</html>
